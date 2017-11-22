@@ -25,4 +25,6 @@ if ($shouldRefresh) {
     refreshenv
 }
 
+# TODO: SSH keys and firing up the ssh-agent
+
 # NOTE: Chocolatey will probably automatically edit this profile file somewhere down here after it installs.
