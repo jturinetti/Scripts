@@ -29,7 +29,7 @@ $fdt = "$($dt.Year)$($dt.Month)$($dt.Day)_$($dt.Hour)$($dt.Minute)$($dt.Second)"
 $filename = "Code_$fdt.zip"
 
 # zip up all code in directory excluding binaries, other non-code files, and specific directories that don't need backing up
-zip -r $filename . -x "*bin\*" "*packages\*" "*obj\*" "*.git*" "*.zip" "*.vscode\" "*.idea\" "*Scala*target\*" "Scratch*" "*TestResults\*" "GitHub*"
+zip -r $filename . -x "*bin\*" "*packages\*" "*obj\*" "*.git*" "*.zip" "*.vscode\" "*.idea\" "*Scala*target\*" "Scratch*" "*TestResults\*"
 
 # ensure Posh-SSH is installed
 if (-Not (Get-Module -ListAvailable -Name Posh-SSH)) {
