@@ -28,14 +28,26 @@ if (-Not (Get-Module -ListAvailable -Name Posh-SSH)) {
 
 Import-Module Posh-SSH
 
-# start the SSH agent and load SSH keys for GitHub authentication
-# assumes keys already exist in ~/.ssh/
-Start-SshAgent -Quiet
+# By default the ssh-agent service is disabled. Allow it to be manually started for the next step to work.
+# Make sure you're running as an Administrator.
+Get-Service ssh-agent | Set-Service -StartupType Manual
+
+# Start the service
+Start-Service ssh-agent
+
+# This should return a status of Running
+Get-Service ssh-agent
+
 Add-SshKey                      # adds id_rsa
-Add-SshKey "~/.ssh/github_rsa"  # adds github key
+# Add-SshKey "~/.ssh/github_rsa"  # adds github key
 
 if ($shouldRefresh) {
     refreshenv
 }
 
 # NOTE: Chocolatey will probably automatically edit this profile file somewhere down here after it installs.
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}
