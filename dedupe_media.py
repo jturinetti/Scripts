@@ -221,7 +221,8 @@ def main():
         # -------------------------------
         # If duplicate found
         # -------------------------------
-        if reason:
+        # safe deletions where files are close enough to delete without review
+        if reason == "SHA256_MATCH" or reason == "PHASH_MATCH(dist=0)":
             if args.delete and to_delete:
                 try:
                     os.remove(to_delete)
